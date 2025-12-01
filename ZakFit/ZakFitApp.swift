@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ZakFitApp: App {
+    @State var authVM = AuthViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(authVM)
         }
     }
 }
