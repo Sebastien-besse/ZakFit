@@ -18,14 +18,22 @@ struct RegisterService{
         request.httpBody = try JSONEncoder().encode(req)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+            if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
+                print("❌ HTTP STATUS :", http.statusCode)
+                print("❌ RESPONSE :", String(data: data, encoding: .utf8) ?? "no body")
+                throw URLError(.badServerResponse)
+            }
+
+            return try JSONDecoder().decode(UserResponseDTO.self, from: data)
+
+        } catch {
+            print("❌ RegisterService ERROR :", error)
+            throw error
         }
 
-        return try JSONDecoder().decode(UserResponseDTO.self, from: data)
     }
 
 }

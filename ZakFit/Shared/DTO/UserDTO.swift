@@ -17,23 +17,22 @@ struct UserRequestDTO: Codable {
     var lastname: String
     var email: String
     var password: String
-    var genre: String
+    var gender: String
     var height: Int
     var weight: Int
-    var objectif: String
+    var objectifHealth: String
     var diet: String
-    var dateOfBirth: String // format ISO8601 "YYYY-MM-DD"
+    var dateOfBirth: String
 }
 
 struct UserResponseDTO: Codable {
     var firstname: String
     var lastname: String
     var email: String
-    var password: String
-    var genre: String
+    var gender: String
     var height: Int
     var weight: Int
-    var objectif: String
+    var objectifHealth: String
     var diet: String
     var dateOfBirth: String
 }

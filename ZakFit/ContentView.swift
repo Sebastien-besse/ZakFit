@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @Environment(AuthViewModel.self) var authVM
 
     var body: some View {
@@ -20,7 +21,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 #Preview {
     ContentView()

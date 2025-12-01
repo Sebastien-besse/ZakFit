@@ -98,10 +98,10 @@ class RegisterViewModel {
             lastname: lastname,
             email: email,
             password: password,
-            genre: gender,
+            gender: gender,
             height: height,
             weight: weight,
-            objectif: goalSelected,
+            objectifHealth: goalSelected,
             diet: dietSelected,
             dateOfBirth: formatter.string(from: dateOfBirth)
         )
