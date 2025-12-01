@@ -99,7 +99,7 @@ class APIService{
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         do {
-            let (data, response) = try await urlSession.data(for: request)
+            let (data, _) = try await urlSession.data(for: request)
             return try jsonDecoder.decode(T.self, from: data)
         } catch {
             throw error

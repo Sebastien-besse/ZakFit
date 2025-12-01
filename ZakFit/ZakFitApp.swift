@@ -8,8 +8,9 @@
 import SwiftUI
 
 @main
-struct ZakFitApp: App {
-    @State var authVM = AuthViewModel()
+struct ZakfitApp: App {
+    @State private var authVM = AuthViewModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -17,3 +18,4 @@ struct ZakFitApp: App {
         }
     }
 }
+

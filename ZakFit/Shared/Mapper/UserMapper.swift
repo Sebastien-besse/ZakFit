@@ -8,8 +8,8 @@
 import Foundation
 
 struct UserMapper{
-    func mapToUserLogin(_ register: AuthModel) -> UserLogin{
-        UserLogin(
+    func mapToUserLogin(_ register: AuthModel) -> UserLoginDTO{
+        UserLoginDTO(
             email: register.email,
             password: register.password)
     }
