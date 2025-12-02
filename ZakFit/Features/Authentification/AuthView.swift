@@ -15,8 +15,6 @@ struct AuthView: View {
     var body: some View {
         @Bindable var authVM = authVM
         NavigationStack{
-            
-            
             VStack(spacing: 100) {
                 Text("ICI POUR ÊTRE MEILLIEUR !")
                     .font(.custom("Futura Condensed ExtraBold", size: 64))

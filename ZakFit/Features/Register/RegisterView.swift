@@ -111,7 +111,7 @@ extension RegisterView {
                     }
                 }
             } label: {
-                Text(vm.canGoNext ? "Continuer" : "Créer mon compte")
+                Text(vm.canGoNext ? "Continuer" : "let's go!")
                     .font(.custom("Futura Condensed ExtraBold", size: 24))
                     .frame(maxWidth: .infinity)
                     .padding()

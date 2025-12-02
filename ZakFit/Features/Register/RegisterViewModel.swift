@@ -34,7 +34,8 @@ class RegisterViewModel {
     var lastname = ""
     var email = ""
     var password = ""
-    var dateOfBirth: Date = Date() 
+    var confirmPassword = ""
+    var dateOfBirth: Date = Date()
 
 
     // MARK: - Listes
@@ -52,6 +53,10 @@ class RegisterViewModel {
 
     var canGoBack: Bool {
         currentStep.rawValue > 0
+    }
+    
+    var isPasswordMatch: Bool {
+        !confirmPassword.isEmpty && password == confirmPassword
     }
 
     // MARK: - Navigation
@@ -84,7 +89,8 @@ class RegisterViewModel {
         !firstname.isEmpty &&
         !lastname.isEmpty &&
         isEmailValid &&
-        password.count >= 6
+        password.count >= 6 &&
+        isPasswordMatch
     }
 
     // MARK: - API Call

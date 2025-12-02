@@ -37,9 +37,11 @@ struct PersonalInfoView: View {
                 )
                 .font(.custom("Futura Condensed ExtraBold", size: 20))
                 .tracking(-1)
-                .foregroundStyle(.pinkPrimary)
+                .foregroundStyle(.brownPrimary)
+                .tint(.brownPrimary)
                 .datePickerStyle(.compact)
-                .frame(maxWidth: .infinity)
+                .frame(width: 340)
+            
             
 
             TextFieldFormCell(userData: $vm.email, label: "Email", width: 340, height: 50)
@@ -52,7 +54,15 @@ struct PersonalInfoView: View {
                 }
 
             SecureFieldFormCell(password: $vm.password, width: 340, height: 50, isConfirmPassword: false)
-            SecureFieldFormCell(password: $vm.password, width: 340, height: 50, isConfirmPassword: true)
+            SecureFieldFormCell(password: $vm.confirmPassword, width: 340, height: 50, isConfirmPassword: true)
+                .overlay(alignment: .trailing) {
+                    if !vm.isPasswordMatch && !vm.confirmPassword.isEmpty {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.pinkPrimary)
+                            .padding(.trailing, 10)
+                    }
+                }
+
             
             Spacer()
                
