@@ -14,13 +14,10 @@ struct ProfilView: View {
 
     var body: some View {
         VStack {
-        
-            
-            
             if vm.isLoading {
                 ProgressView("Chargement…")
                     .padding()
-            } else if let user = vm.user {
+            } else if vm.user != nil {
 
                 ScrollView {
                     VStack(spacing: 25) {
@@ -151,6 +148,7 @@ struct ProfilView: View {
                     }
                     .padding()
                 }
+                .scrollIndicators(.hidden)
 
             } else {
                 Text("Aucune donnée utilisateur")

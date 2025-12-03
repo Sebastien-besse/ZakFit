@@ -6,49 +6,53 @@
 //
 
 import SwiftUI
+import Observation
 
 struct RegisterView: View {
-
+    
+    @Environment(AuthViewModel.self) var auth       // même instance que ContentView
     @Environment(RegisterViewModel.self) var vm
+    @Environment(\.dismiss) private var dismiss    // pour fermer RegisterView automatiquement
 
     var body: some View {
-
-        VStack {
-
-            // MARK: - Progress bar
-            progressHeader
-
-            // MARK: - Step Form
-            ZStack {
-                switch vm.currentStep {
-                case .gender: GenderView()
-                case .height: HeightView()
-                case .weight: WeightView()
-                case .goal: GoalView()
-                case .diet: DietView()
-                case .personalInfo: PersonalInfoView()
+        NavigationStack {
+            VStack {
+                
+                // MARK: - Progress bar
+                progressHeader
+                
+                // MARK: - Step Form
+                ZStack {
+                    switch vm.currentStep {
+                    case .gender: GenderView()
+                    case .height: HeightView()
+                    case .weight: WeightView()
+                    case .goal: GoalView()
+                    case .diet: DietView()
+                    case .personalInfo: PersonalInfoView()
+                    }
                 }
+                .transition(.asymmetric(
+                    insertion: .move(edge: vm.isGoingForward ? .trailing : .leading),
+                    removal: .move(edge: vm.isGoingForward ? .leading : .trailing)
+                ))
+                .id(vm.currentStep)
+                .animation(.easeInOut, value: vm.currentStep)
+                
+                Spacer()
+                
+                bottomButtons
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
             }
-            .transition(.asymmetric(
-                insertion: .move(edge: vm.isGoingForward ? .trailing : .leading),
-                removal: .move(edge: vm.isGoingForward ? .leading : .trailing)
-            ))
-            .id(vm.currentStep)
-            .animation(.easeInOut, value: vm.currentStep)
-
-            Spacer()
-
-            bottomButtons
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.background)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.background)
     }
 }
 
+// MARK: - Progress bar
 extension RegisterView {
-
     var progressHeader: some View {
         GeometryReader { geo in
             let totalWidth = geo.size.width * 0.9
@@ -82,8 +86,8 @@ extension RegisterView {
     }
 }
 
+// MARK: - Bottom buttons
 extension RegisterView {
-
     var bottomButtons: some View {
         HStack(spacing: 15) {
 
@@ -111,7 +115,7 @@ extension RegisterView {
                     }
                 }
             } label: {
-                Text(vm.canGoNext ? "Continuer" : "let's go!")
+                Text(vm.canGoNext ? "Continuer" : "Let's go!")
                     .font(.custom("Futura Condensed ExtraBold", size: 24))
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -123,23 +127,34 @@ extension RegisterView {
         }
     }
 
-    // MARK: - HELPERS
     var submitColor: Color {
         vm.currentStep == .personalInfo && !vm.canSubmit ? .brownPrimary.opacity(0.4) : .brownPrimary
     }
+}
 
-    // MARK: - API CALL
+// MARK: - API CALL + Auto-login + Navigation
+extension RegisterView {
     func createAccount() async {
         do {
+            // 1️⃣ Création du compte
             let user = try await vm.submit()
             print("Compte créé avec succès :", user)
 
-            // TODO : route vers Onboarding terminé ou HomeScreen
-            // ex: navigateToHome = true
+            // 2️⃣ Connexion automatique
+            auth.email = vm.email
+            auth.password = vm.password
+            await auth.login()
+            print("TOKEN =", auth.token ?? "aucun token")
+            print("auth.isAuth =", auth.isAuth)
+
+            // 3️⃣ Fermer RegisterView pour revenir à ContentView
+            if auth.isAuth {
+                dismiss()
+            }
 
         } catch {
             print("Erreur API :", error.localizedDescription)
-            // TODO : afficher une alerte
+            // tu peux afficher un alert ici
         }
     }
 }
@@ -147,5 +162,6 @@ extension RegisterView {
 #Preview {
     RegisterView()
         .environment(RegisterViewModel())
+        .environment(AuthViewModel())
 }
 

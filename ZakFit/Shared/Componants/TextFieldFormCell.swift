@@ -26,7 +26,32 @@ struct TextFieldFormCell: View {
     }
 }
 
-
+struct TextFieldFormObjectifCell: View {
+    @Binding var userData: Int
+    let label: String
+    let (width, height): (CGFloat, CGFloat)
+    var body: some View {
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color.background)
+            .frame(width: width, height: height)
+            .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
+            .overlay {
+                TextField(
+                    label,
+                    text: Binding(
+                        get: { String(userData) },
+                        set: { newValue in
+                            userData = Int(newValue) ?? 0   // conversion sécurisée
+                        }
+                    )
+                )
+                .font(.custom("Futura Condensed ExtraBold", size: 20))
+                .foregroundStyle(.brownPrimary)
+                .keyboardType(.numberPad)
+                .padding()
+            }
+    }
+}
 
 struct SecureFieldFormCell: View {
     @Binding var password: String

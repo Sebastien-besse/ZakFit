@@ -15,7 +15,7 @@ struct CardCarouselCell: View {
         ZStack{
             RoundedRectangle(cornerRadius: 6)
                 .fill(.brownPrimary)
-                .frame(width: 200, height: 280)
+                .frame(width: 240, height: 280)
             VStack(spacing: 20){
                 Image(image)
                     .resizable()

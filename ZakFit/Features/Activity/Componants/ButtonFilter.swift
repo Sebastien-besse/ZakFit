@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct ButtonFilter: View {
     let name: String
@@ -17,12 +16,12 @@ struct ButtonFilter: View {
     var body: some View {
         Button(action: action) {
             Text(name)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.custom("Futura Bold", size: 14 ))
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
-                .background(isFilter ? Color.blue.opacity(0.9) : Color.clear)
-                .foregroundColor(isFilter ? .white : .primary)
-                .cornerRadius(12)
+                .background(isFilter ? Color.yellowPrimary : Color.clear)
+                .foregroundColor(.brownPrimary)
+                .cornerRadius(7)
         }
         .buttonStyle(.plain)
     }
