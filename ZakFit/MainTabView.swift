@@ -33,16 +33,28 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Activité", systemImage:"dumbbell.fill")
                 }
+            
+            AddMealView(foodname: "", quantity: 0)
+                .tabItem {
+                    Label("Repas", systemImage: "fork.knife")
+                }
+            
+            // ——— Ajout de l'onglet Historique
+            HistoryView()
+                .tabItem {
+                    Label("Historique", systemImage: "clock.fill")
+                }
         }
         .tint(.pinkPrimary)
     }
 }
+
 #Preview {
     @Previewable @State var path = NavigationPath()
     let profileVM = ProfileViewModel()
     let authVM = AuthViewModel()
     
-    MainTabView(profileVM: profileVM, pathFromContent: $path) // ← nom exact du paramètre
+    MainTabView(profileVM: profileVM, pathFromContent: $path)
         .environment(authVM)
 }
 

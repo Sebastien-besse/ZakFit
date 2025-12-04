@@ -55,7 +55,6 @@ struct HomeView: View {
             }
             .padding(.top, -14)
            
-            // ILLUSTRATION OBJECTIF JOURNALIER
             VStack {
                 Text("30% de ton objectif quotidien")
                     .font(.custom("Futura Bold", size: 12))
@@ -66,11 +65,9 @@ struct HomeView: View {
                     .padding(.leading, 30)
             }
             .padding(.vertical)
-
-            // BOUTONS DU BAS
+            Text("Tes objectifs")
+                .font(.custom("Futura Medium", size: 12))
             HStack(spacing: 20) {
-
-                // Bouton ACTIVITÉ → SHEET
                 VStack {
                     Button {
                         showObjectifActivity = true

@@ -28,7 +28,7 @@ struct ActivityView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     // Title
-                    Text("Nouvelle Séance")
+                    Text("NOUVELLE SÉANCE")
                         .font(.custom("Futura Condensed ExtraBold", size: 40))
                         .tracking(-2)
                         .foregroundStyle(.brownPrimary)
@@ -200,7 +200,7 @@ struct ActivityView: View {
                 }
                 .frame(width: 360, height: 36)
             }
-            .frame(width: 320, height: 36)
+            .frame(width: 350, height: 36)
     }
 }
 

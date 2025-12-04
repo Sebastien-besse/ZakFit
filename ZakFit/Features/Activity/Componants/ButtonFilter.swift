@@ -22,6 +22,7 @@ struct ButtonFilter: View {
                 .background(isFilter ? Color.yellowPrimary : Color.clear)
                 .foregroundColor(.brownPrimary)
                 .cornerRadius(7)
+                .frame(width: 100)
         }
         .buttonStyle(.plain)
     }
@@ -29,5 +30,5 @@ struct ButtonFilter: View {
 
 
 #Preview {
-    ButtonFilter(name: "", isFilter: false, action: {})
+    ButtonFilter(name: "rfjn", isFilter: true, action: {})
 }

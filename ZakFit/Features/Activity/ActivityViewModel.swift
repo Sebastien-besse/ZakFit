@@ -152,5 +152,7 @@ class ActivityViewModel {
             return nil
         }
     }
-    }
+}
+
+
 

@@ -79,7 +79,7 @@ struct ObjectifActivityView: View {
                         .padding()
                         .frame(width: 200)
                         .background(.brownPrimary)
-                        .cornerRadius(15)
+                        .cornerRadius(30)
                         .shadow(radius: 4)
                 }
                 .padding(.top, 50)

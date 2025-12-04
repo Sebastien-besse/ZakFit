@@ -8,15 +8,25 @@
 import SwiftUI
 
 struct DetailActivityView: View {
+    let activity: Activity   // <- ajouter cette ligne
+
     var body: some View {
         VStack(spacing: 20){
             Text("Détail séance")
                 .font(.custom("Futura Condensed ExtraBold", size: 40))
                 .tracking(-1)
                 .foregroundStyle(.brownPrimary)
-            DateDetailActivityCell(day: "21", month: "12", year: "2025")
-            
-            CardDetailActivityCell(image: "NailPump", type: "Musculation", exercice: "Pump")
+
+            DateDetailActivityCell(day: activity.day,
+                                   month: activity.month,
+                                   year: activity.year)
+                .padding(.vertical)
+
+            CardDetailActivityCell(image: activity.exercise.imageName,
+                                   type: activity.exercise.type,
+                                   exercice: activity.exercise.name)
+
+            // Durée et calories
             HStack{
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
@@ -28,19 +38,19 @@ struct DetailActivityView: View {
                             .tracking(-1)
                             .foregroundStyle(Color.background)
                         Image("HaltereYellow")
-                        Text("45 minutes")
+                        Text("\(activity.duration) minutes")
                             .font(.custom("Futura", size: 20))
                             .tracking(-1)
                             .foregroundStyle(Color.background)
                     }
                 }
-                
+
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.brownPrimary)
                         .frame(width: 150, height: 140)
                     VStack{
-                        Text("Durée")
+                        Text("Brûlé")
                             .font(.custom("Futura Condensed ExtraBold", size: 20))
                             .tracking(-1)
                             .foregroundStyle(Color.background)
@@ -49,17 +59,16 @@ struct DetailActivityView: View {
                             .scaledToFill()
                             .frame(width: 45, height: 50)
                             .foregroundStyle(.yellowPrimary)
-                        Text("403 Kcal")
+                        Text("\(activity.caloriesBurned) Kcal")
                             .font(.custom("Futura", size: 20))
                             .tracking(-1)
                             .foregroundStyle(Color.background)
                     }
                 }
-                
             }
-           
+
             Button(role: .destructive) {
-                print("créer")
+                print("Retour")
             } label: {
                 Text("Retour")
                     .font(.custom("Futura Condensed ExtraBold", size: 22))
@@ -71,7 +80,6 @@ struct DetailActivityView: View {
                     .shadow(radius: 4)
             }
             .frame(height: 170, alignment: .bottom)
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.background)
@@ -79,5 +87,5 @@ struct DetailActivityView: View {
 }
 
 #Preview {
-    DetailActivityView()
+    DetailActivityView(activity: .init(exercise: .init(name: "Pump", type: "Musculation", defaultCaloriesPerMin: 8, motivationMessage: "Dicippline", imageName: "NailPump"), duration: 90, caloriesBurned: 405, day: "04", month: "12", year: "2025"))
 }
