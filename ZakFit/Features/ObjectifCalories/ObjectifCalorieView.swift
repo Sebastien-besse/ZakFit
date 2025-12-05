@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ObjectifCalorieView: View {
-    @State var frequence: Int
+    @State var calories: Int = 2300
+    @State var proteins: Int = 80
+    @State var glucides: Int = 150
+    @State var lipids: Int = 8
     var onClose: () -> Void
     var body: some View {
         ZStack(alignment: .topTrailing) {
 
             // --- TON CONTENU EXACT ---
             VStack(spacing: 50){
-                Text("Mon objectif journalier")
+                Text("MON ONJECTIF JOURNALIER")
                     .font(.custom("Futura Condensed ExtraBold", size: 40))
                     .tracking(-2)
                     .foregroundStyle(.brownPrimary)
-                    .frame(width: 200)
+                    .frame(width: 300)
                     .multilineTextAlignment(.center)
 
                     ZStack{
@@ -29,28 +32,28 @@ struct ObjectifCalorieView: View {
 
                         VStack(alignment: .leading, spacing: 40){
                             ContentObjectifCell(
-                                value: $frequence,
-                                icone: "FlameObjectif",
+                                value: $calories,
+                                icone: "Energy",
                                 description: "Kcal",
                                 label: "Frequence"
                             )
                             
                             ContentObjectifCell(
-                                value: $frequence,
+                                value: $proteins,
                                 icone: "Chicken",
                                 description: "g",
                                 label: "Frequence"
                             )
                             
                             ContentObjectifCell(
-                                value: $frequence,
+                                value: $glucides,
                                 icone: "Glucide",
                                 description: "g",
                                 label: "Calories"
                             )
 
                             ContentObjectifCell(
-                                value: $frequence,
+                                value: $lipids,
                                 icone: "Lipid",
                                 description: "g",
                                 label: "Durée"
@@ -96,5 +99,5 @@ struct ObjectifCalorieView: View {
 }
 
 #Preview {
-    ObjectifCalorieView(frequence: 8, onClose: {})
+    ObjectifCalorieView(onClose: {})
 }

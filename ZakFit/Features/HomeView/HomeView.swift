@@ -107,12 +107,12 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .fullScreenCover(isPresented: $showObjectifActivity) {
-            ObjectifActivityView(frequence: 3, onClose: {
+            ObjectifActivityView(onClose: {
                 showObjectifActivity = false
             })
         }
         .fullScreenCover(isPresented: $showObjectifCalories) {
-            ObjectifCalorieView(frequence: 3, onClose: {
+            ObjectifCalorieView(onClose: {
                 showObjectifCalories = false
             })
         }

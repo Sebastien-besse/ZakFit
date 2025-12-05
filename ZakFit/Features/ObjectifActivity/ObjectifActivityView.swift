@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ObjectifActivityView: View {
-    @State var frequence: Int
+    @State var frequence: Int = 4
+    @State var calories: Int = 345
+    @State var time: Int = 90
     var onClose: () -> Void    // ← callback pour la fermeture
 
     var body: some View {
@@ -16,11 +18,11 @@ struct ObjectifActivityView: View {
 
             // --- TON CONTENU EXACT ---
             VStack(spacing: 50){
-                Text("Mon objectif hebdo")
+                Text("MON OBJECTIF HEBDO")
                     .font(.custom("Futura Condensed ExtraBold", size: 40))
                     .tracking(-2)
                     .foregroundStyle(.brownPrimary)
-                    .frame(width: 200)
+                    .frame(width: 300)
                     .multilineTextAlignment(.center)
 
                 VStack{
@@ -54,14 +56,14 @@ struct ObjectifActivityView: View {
 
                         VStack(spacing: 20){
                             ContentObjectifCell(
-                                value: $frequence,
+                                value: $calories,
                                 icone: "FlameObjectif",
                                 description: "Kcal",
                                 label: "Calories"
                             )
 
                             ContentObjectifCell(
-                                value: $frequence,
+                                value: $time,
                                 icone: "Timer",
                                 description: "Min",
                                 label: "Durée"
@@ -107,5 +109,5 @@ struct ObjectifActivityView: View {
 }
 
 #Preview {
-    ObjectifActivityView(frequence: 4, onClose: {})
+    ObjectifActivityView(onClose: {})
 }
